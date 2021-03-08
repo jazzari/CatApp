@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :breed do
-    name { "MyString" }
-    breed_id { "MyString" }
+    name { "CatBreed" }
+    breed_id { "catb" }
     rarity { 1 }
   end
 end
