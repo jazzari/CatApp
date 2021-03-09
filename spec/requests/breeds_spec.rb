@@ -9,21 +9,15 @@ RSpec.describe BreedsController do
 
         it "should return a proper JSON" do
             breed = create(:breed)
-            get '/breeds' 
-            body = JSON.parse(response.body).deep_symbolize_keys
-            pp body
-            expect(body).to eq(
-                data: [
-                    {
-                        id: breed.id.to_s,
-                        type: 'breeds',
-                        attributes: {
-                            name: breed.name,
-                            breed_id: breed.breed_id,
-                            rarity: breed.rarity
-                        }
-                    }
-                ]
+            get '/breeds'
+            expect(json_data.length).to eq(1)
+            first = json_data.first
+            expect(first[:id]).to eq(breed.id.to_s)
+            expect(first[:type]).to eq('breeds')
+            expect(first[:attributes]).to eq(
+                name: breed.name,
+                breed_id: breed.breed_id,
+                rarity: breed.rarity
             )
         end
     end
