@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :breed do
-    name { "CatBreed" }
+    sequence (:name) { |n| "CatBreed#{n}" }
     breed_id { "catb" }
     rarity { 1 }
   end
