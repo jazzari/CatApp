@@ -37,7 +37,7 @@ RSpec.describe Breed, type: :model do
     end
   end
 
-  describe ".METHODS" do 
+  describe ".Methods" do 
     it "should return breeds in correct order" do 
       older_breed = create(:breed, name: 'Acat')
       recent_breed = create(:breed)

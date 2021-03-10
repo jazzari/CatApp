@@ -1,7 +1,8 @@
 class BreedsController < ApplicationController
+    include Paginable
     def index 
-        breeds = Breed.ordered
-        render json: serializer.new(breeds), status: :ok
+        paginated = paginate(Breed.ordered)
+        render json: serializer.new(paginated.items), status: :ok
     end
 
     def show
@@ -10,7 +11,9 @@ class BreedsController < ApplicationController
     def destroy
     end
 
+    private
     def serializer
         BreedSerializer
     end
+
 end
