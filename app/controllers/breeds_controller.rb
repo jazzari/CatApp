@@ -1,6 +1,6 @@
 class BreedsController < ApplicationController
     def index 
-        breeds = Breed.all
+        breeds = Breed.ordered
         render json: serializer.new(breeds), status: :ok
     end
 

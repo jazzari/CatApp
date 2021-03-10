@@ -36,4 +36,19 @@ RSpec.describe Breed, type: :model do
       expect(breed.errors[:rarity]).to include("must be less than 6")
     end
   end
+
+  describe ".METHODS" do 
+    it "should return breeds in correct order" do 
+      older_breed = create(:breed, name: 'Acat')
+      recent_breed = create(:breed)
+      expect(described_class.ordered).to eq(
+        [older_breed, recent_breed]
+      )
+
+      recent_breed.update_column(:name, 'Abreed')
+      expect(described_class.ordered).to eq(
+        [recent_breed, older_breed]
+      )
+    end
+  end
 end
