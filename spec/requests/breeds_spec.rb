@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe BreedsController do 
     describe "#index" do
         subject { get '/breeds' }
+
         it "should return a success response" do
             subject
             expect(response).to have_http_status(:ok)
@@ -26,7 +27,7 @@ RSpec.describe BreedsController do
             breed1, breed2, breed3 = create_list(:breed, 3)
             get '/breeds', params: { page: { number: 2, size: 1 } }
             expect(json_data.length).to eq(1)
-            expect(json_data.first[:id]).to eq(breed2.id.to_s)
+            expect(json_data.first[:id]).to eq(breed1.id.to_s)
         end
     end
 
@@ -51,4 +52,21 @@ RSpec.describe BreedsController do
             )
         end
     end
+
+    describe "#destroy" do 
+        let(:breed) { create :breed }
+        subject { delete "/breeds/#{breed.id}" }
+
+        it "should have 204 status code" do 
+            subject
+            expect(response).to have_http_status(:no_content)
+        end
+
+        it "should destroy the breed" do 
+            breed
+            expect{ subject }.to change{ Breed.count }.by(-1)
+        end
+
+    end
+
 end
