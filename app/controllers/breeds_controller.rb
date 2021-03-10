@@ -6,6 +6,8 @@ class BreedsController < ApplicationController
     end
 
     def show
+        breed = Breed.find(params[:id])
+        render json: serializer.new(breed)
     end
 
     def destroy
