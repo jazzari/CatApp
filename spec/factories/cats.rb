@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :cat do
-    cat_url { "MyString" }
-    breed_name { "MyString" }
+    cat_url { "funnycat_url" }
+    breed_name { "funy" }
     breed { nil }
   end
 end

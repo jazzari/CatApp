@@ -27,7 +27,7 @@ RSpec.describe BreedsController do
             breed1, breed2, breed3 = create_list(:breed, 3)
             get '/breeds', params: { page: { number: 2, size: 1 } }
             expect(json_data.length).to eq(1)
-            expect(json_data.first[:id]).to eq(breed1.id.to_s)
+            expect(json_data.first[:id]).to eq(breed2.id.to_s)
         end
     end
 
