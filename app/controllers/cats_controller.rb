@@ -16,6 +16,7 @@ class CatsController < ApplicationController
     def destroy
         cat = Cat.find(params[:id])
         cat.destroy
+        head :no_content
     end
 
     private

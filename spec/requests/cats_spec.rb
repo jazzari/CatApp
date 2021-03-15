@@ -53,5 +53,18 @@ RSpec.describe CatsController do
     end
 
     describe "#destroy" do 
+        let(:breed) { create :breed }
+        let(:cat) { create :cat, breed_id: breed.id}
+        subject { delete "/cats/#{cat.id}" }
+
+        it "should have 204 status code" do 
+            subject
+            expect(response).to have_http_status(:no_content)
+        end
+
+        it "should destroy the cat" do 
+            cat
+            expect{ subject }.to change{ Cat.count }.by(-1)
+        end
     end
 end
