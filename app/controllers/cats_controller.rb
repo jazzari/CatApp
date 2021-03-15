@@ -8,6 +8,9 @@ class CatsController < ApplicationController
 
     def show
         cat = Cat.find(params[:id])
+        render json: serializer.new(cat)
+        rescue ActiveRecord::RecordNotFound => e 
+            render json: { message: e.message }
     end
 
     def destroy

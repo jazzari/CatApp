@@ -8,7 +8,7 @@ class BreedsController < ApplicationController
     def show
         breed = Breed.find(params[:id])
         render json: serializer.new(breed)
-    rescue ActiveRecord::RecordNotFound => e 
+      rescue ActiveRecord::RecordNotFound => e 
         render json: { message: e.message }
     end
 

@@ -32,6 +32,24 @@ RSpec.describe CatsController do
     end
 
     describe "#show" do 
+        let(:breed) { create :breed }
+        let(:cat) { create :cat, breed_id: breed.id}
+        subject { get "/cats/#{cat.id}" }
+
+        it "should return a success response" do 
+            subject
+            expect(response).to have_http_status(:ok)
+        end
+
+        it "should return a proper json response" do 
+            subject
+            expect(json_data[:id]).to eq(cat.id.to_s)
+            expect(json_data[:type]).to eq('cats')
+            expect(json_data[:attributes]).to eq(
+                breed_name: cat.breed_name,
+                cat_url: cat.cat_url
+            )
+        end
     end
 
     describe "#destroy" do 

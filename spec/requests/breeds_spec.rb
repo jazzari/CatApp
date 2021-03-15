@@ -42,7 +42,6 @@ RSpec.describe BreedsController do
 
         it "should return proper JSON" do 
             subject
-            # expected_breed = Breed.find(breed.id)
             expect(json_data[:id]).to eq(breed.id.to_s)
             expect(json_data[:type]).to eq('breeds')
             expect(json_data[:attributes]).to eq(
