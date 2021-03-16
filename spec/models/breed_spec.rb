@@ -35,6 +35,13 @@ RSpec.describe Breed, type: :model do
       expect(breed).not_to be_valid
       expect(breed.errors[:rarity]).to include("must be less than 6")
     end
+
+    it "has to have a cats_count number" do 
+      breed = create(:breed)
+      cat1, cat2, cat3 = create_list(:cat, 3, breed_id: breed.id)
+      breed.reload
+      expect(breed[:cats_count]).to eq(3)
+    end
   end
 
   describe ".Methods" do 

@@ -3,5 +3,6 @@ FactoryBot.define do
     sequence (:name) { |n| "CatBreed#{n}" }
     breed_id { "catb" }
     rarity { 1 }
+    cats_count { 0 }
   end
 end

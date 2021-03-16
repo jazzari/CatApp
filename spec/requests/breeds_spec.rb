@@ -19,7 +19,8 @@ RSpec.describe BreedsController do
             expect(first[:attributes]).to eq(
                 name: breed.name,
                 breed_id: breed.breed_id,
-                rarity: breed.rarity
+                rarity: breed.rarity,
+                cats_count: breed.cats_count
             )
         end
 
@@ -47,7 +48,8 @@ RSpec.describe BreedsController do
             expect(json_data[:attributes]).to eq(
                 name: breed.name,
                 breed_id: breed.breed_id,
-                rarity: breed.rarity
+                rarity: breed.rarity,
+                cats_count: breed.cats_count
             )
         end
     end
