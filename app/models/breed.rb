@@ -6,4 +6,5 @@ class Breed < ApplicationRecord
 
     scope :ordered, -> { order(:name) }
     scope :filter_by_rarity, -> (rarity) { where rarity: rarity }
+    scope :filter_by_name, -> (name) { where("name like ?", "#{name}%")}
 end

@@ -31,7 +31,7 @@ RSpec.describe BreedsController do
             expect(json_data.first[:id]).to eq(breed2.id.to_s)
         end
 
-        it "should filter breeds by rarity" do 
+        it "should return filtered breeds by rarity" do 
             breed1, breed2, breed3 = create_list(:breed, 3, rarity: 4)
             breed1.update_column(:rarity, 2)
             get '/breeds', params: { rarity: 4 }
@@ -41,6 +41,18 @@ RSpec.describe BreedsController do
             get '/breeds', params: { rarity: 2 }
             expect(json_data.length).to eq(1)
             expect(json_data.first[:attributes][:rarity]).to eq(2)
+        end
+
+        it "sould return filtered breeds by name" do 
+            breed1, breed2, breed3 = create_list(:breed, 3, name: "funnycat")
+            breed1.update_column(:name, 'happycat')
+            get '/breeds', params: { name: "fun" }
+            expect(json_data.length).to eq(2)
+            expect(json_data.first[:attributes][:name]).to eq("funnycat")
+
+            get '/breeds', params: { name: "happyc" }
+            expect(json_data.length).to eq(1)
+            expect(json_data.first[:attributes][:name]).to eq("happycat")
         end
     end
 

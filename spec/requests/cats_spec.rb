@@ -40,7 +40,6 @@ RSpec.describe CatsController do
 
             breed2 = create(:breed, breed_id: "hapy")
             cat1.update_column(:breed_name, breed2.breed_id)
-            pp cat1.breed_name
             get '/cats', params: { breed_name: breed2.breed_id}
             expect(json_data.length).to eq(1)
             first = json_data.first

@@ -61,10 +61,23 @@ RSpec.describe Breed, type: :model do
     it "should filter breeds by rarity" do 
       breed1, breed2, breed3 = create_list(:breed, 3, rarity: 3)
       breed1.update_column(:rarity, 5)
+      
       expect(described_class.filter_by_rarity(3)).to eq(
         [breed2, breed3]
       )
       expect(described_class.filter_by_rarity(5)).to eq(
+        [breed1]
+      )
+    end
+
+    it "should filter breeds by name" do 
+      breed1, breed2, breed3 = create_list(:breed, 3, name: "funnycat")
+      breed1.update_column(:name, "happycat")
+
+      expect(described_class.filter_by_name('funn')).to eq(
+        [breed2, breed3]
+      )
+      expect(described_class.filter_by_name('happyc')).to eq(
         [breed1]
       )
     end

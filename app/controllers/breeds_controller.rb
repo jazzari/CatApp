@@ -3,6 +3,7 @@ class BreedsController < ApplicationController
     def index 
         @breeds = Breed.where(nil) 
         @breeds = @breeds.filter_by_rarity(params[:rarity]) if params[:rarity].present?
+        @breeds = @breeds.filter_by_name(params[:name]) if params[:name].present?
         paginated = paginate(@breeds.ordered)
         render json: serializer.new(paginated.items), status: :ok
     end
