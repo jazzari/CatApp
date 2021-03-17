@@ -36,5 +36,23 @@ RSpec.describe Cat, type: :model do
         [older_cat, recent_cat]
       )
     end
+
+    it "should return only cats belonging to a specific breed" do 
+      breed.breed_id = 'funy'
+      cat1, cat2 = create_list(:cat, 2, breed_id: breed.id)
+      expect(described_class.filter_by_breed(breed.breed_id)).to eq(
+        [cat1, cat2]
+      )
+
+      cat1.update_column(:breed_name, "catb")
+      expect(described_class.filter_by_breed(breed.breed_id)).to eq(
+        [cat2]
+      )
+
+      breed.breed_id = 'catb'
+      expect(described_class.filter_by_breed(breed.breed_id)).to eq(
+        [cat1]
+      )
+    end
   end
 end

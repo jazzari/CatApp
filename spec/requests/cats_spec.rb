@@ -29,6 +29,23 @@ RSpec.describe CatsController do
             expect(json_data.length).to eq(1)
             expect(json_data.first[:id]).to eq(cat2.id.to_s)
         end
+
+        it "should filter cats by breed" do 
+            breed.breed_id = "funy"
+            cat1, cat2 = create_list(:cat, 2, breed_id: breed.id)
+            get '/cats', params: { breed_name: breed.breed_id}
+            expect(json_data.length).to eq(2)
+            first = json_data.first
+            expect(first[:attributes][:breed_name]).to eq(breed.breed_id)
+
+            breed2 = create(:breed, breed_id: "hapy")
+            cat1.update_column(:breed_name, breed2.breed_id)
+            pp cat1.breed_name
+            get '/cats', params: { breed_name: breed2.breed_id}
+            expect(json_data.length).to eq(1)
+            first = json_data.first
+            expect(first[:attributes][:breed_name]).to eq(breed2.breed_id)
+        end
     end
 
     describe "#show" do 

@@ -2,7 +2,9 @@ class CatsController < ApplicationController
     include Paginable
 
     def index
-        paginated = paginate(Cat.recent)
+        @cats = Cat.where(nil) 
+        @cats = @cats.filter_by_breed(params[:breed_name]) if params[:breed_name].present?
+        paginated = paginate(@cats.recent)
         render json: serializer.new(paginated.items), status: :ok
     end
 
