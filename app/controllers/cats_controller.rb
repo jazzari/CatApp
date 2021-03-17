@@ -4,8 +4,12 @@ class CatsController < ApplicationController
     def index
         @cats = Cat.where(nil) 
         @cats = @cats.filter_by_breed(params[:breed_name]) if params[:breed_name].present?
-        paginated = paginate(@cats.recent)
-        render json: serializer.new(paginated.items), status: :ok
+        if @cats.empty?
+            render json:("there is no cats belonging to that breed")
+        else
+            paginated = paginate(@cats.recent)
+            render json: serializer.new(paginated.items), status: :ok
+        end
     end
 
     def show
