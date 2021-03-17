@@ -1,7 +1,9 @@
 class BreedsController < ApplicationController
     include Paginable
     def index 
-        paginated = paginate(Breed.ordered)
+        @breeds = Breed.where(nil) 
+        @breeds = @breeds.filter_by_rarity(params[:rarity]) if params[:rarity].present?
+        paginated = paginate(@breeds.ordered)
         render json: serializer.new(paginated.items), status: :ok
     end
 

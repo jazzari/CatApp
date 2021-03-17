@@ -5,4 +5,5 @@ class Breed < ApplicationRecord
     has_many :cats
 
     scope :ordered, -> { order(:name) }
+    scope :filter_by_rarity, -> (rarity) { where rarity: rarity }
 end
