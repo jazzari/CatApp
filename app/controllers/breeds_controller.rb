@@ -19,7 +19,11 @@ class BreedsController < ApplicationController
 
     def destroy
         breed = Breed.find(params[:id])
-        breed.destroy
+        if current_user.admin
+            breed.destroy
+        else
+            render json:("You need to be an Admin to do this"), status: :method_not_allowed
+        end
         head :no_content
     end
 

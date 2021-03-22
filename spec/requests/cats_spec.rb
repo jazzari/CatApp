@@ -70,7 +70,7 @@ RSpec.describe CatsController do
 
     describe "#destroy" do 
         before(:each) do 
-            @user = create :user 
+            @user = create :user, admin: true
             @signin_url = '/auth/sign_in'
             @login_params = {
                 email: @user.email,

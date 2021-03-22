@@ -22,8 +22,13 @@ class CatsController < ApplicationController
 
     def destroy
         cat = Cat.find(params[:id])
-        cat.destroy
-        head :no_content
+        if current_user.admin
+            cat.destroy
+            head :no_content
+        else
+            render json:("You need to be an Admin to do this"), status: :method_not_allowed
+        end
+        
     end
 
     private
