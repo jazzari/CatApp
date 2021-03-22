@@ -69,9 +69,19 @@ RSpec.describe CatsController do
     end
 
     describe "#destroy" do 
+        before(:each) do 
+            @user = create :user 
+            @signin_url = '/auth/sign_in'
+            @login_params = {
+                email: @user.email,
+                password: @user.password
+            }
+            post @signin_url, params: @login_params, as: :json
+            @header = response.headers.slice('client', 'access-token', 'uid', 'expiry')
+        end
         let(:breed) { create :breed }
         let(:cat) { create :cat, breed_id: breed.id}
-        subject { delete "/cats/#{cat.id}" }
+        subject { delete "/cats/#{cat.id}", headers: @header }
 
         it "should have 204 status code" do 
             subject

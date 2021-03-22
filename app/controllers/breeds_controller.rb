@@ -1,5 +1,7 @@
 class BreedsController < ApplicationController
     include Paginable
+    before_action :authenticate_user!, only: :destroy
+    
     def index 
         @breeds = Breed.where(nil) 
         @breeds = @breeds.filter_by_rarity(params[:rarity]) if params[:rarity].present?

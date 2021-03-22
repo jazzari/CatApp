@@ -1,5 +1,6 @@
 class CatsController < ApplicationController
     include Paginable
+    before_action :authenticate_user!, only: :destroy
 
     def index
         @cats = Cat.where(nil) 

@@ -38,6 +38,9 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include ApiHelpers
 
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Warden::Test::Helpers
+
   config.before(:suite) { DatabaseCleaner.clean_with(:truncation) }
   config.before(:each) { DatabaseCleaner.strategy = :transaction }
   config.before(:each, js: true) { DatabaseCleaner.strategy = :truncation }
