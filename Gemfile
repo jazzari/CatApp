@@ -23,7 +23,7 @@ gem 'puma', '~> 5.0'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 # used to import data from external api
 gem 'rest-client', '~> 2.1'
 
@@ -31,6 +31,8 @@ gem 'rest-client', '~> 2.1'
 gem 'jsonapi-serializer'
 # paginate
 gem 'jsom-pagination', '~> 0.1.2'
+# User authorization
+gem 'devise_token_auth'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
