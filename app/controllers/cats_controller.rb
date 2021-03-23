@@ -26,7 +26,7 @@ class CatsController < ApplicationController
             cat.destroy
             head :no_content
         else
-            render json:("You need to be an Admin to do this"), status: :method_not_allowed
+            render json:("You need to be an Admin to delete a cat"), status: :method_not_allowed
         end
         
     end

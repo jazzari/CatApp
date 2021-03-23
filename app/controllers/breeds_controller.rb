@@ -22,7 +22,7 @@ class BreedsController < ApplicationController
         if current_user.admin
             breed.destroy
         else
-            render json:("You need to be an Admin to do this"), status: :method_not_allowed
+            render json:("You need to be an Admin to delete a breed"), status: :method_not_allowed
         end
         head :no_content
     end
