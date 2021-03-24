@@ -23,5 +23,29 @@ query.each do |query|
         puts "saved breed"
       else
         puts "not saved breed"
-      end
+    end
+end
+
+
+query2 = ["breed_id=char", "breed_id=emau", "breed_id=norw"]
+cat_url = "https://api.thecatapi.com/v1/images/search"
+query2.each_with_index do |query, index|
+    ca = cat_url+"?"+query+"&"+"limit=2"
+    data = JSON.parse( RestClient.get("#{ca}#{ENV["CAT_API_KEY"]}") )
+    data.each do |sub_array|
+            name = sub_array['breeds'][0]['id']
+            cats = Cat.new do |c|
+                c.breed_name = sub_array['breeds'][0]['id'],
+                c.cat_url = sub_array['url']
+                c.breed_id = index + 1
+            end
+            cats.breed_name = name 
+            if cats.save
+                cats.update_column(:created_at, (rand*10).days.ago)
+                puts cats.created_at
+                puts "saved cat"
+            else
+                puts "not saved cat"
+            end 
+    end
 end
