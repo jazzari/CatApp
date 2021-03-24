@@ -30,7 +30,7 @@ end
 query2 = ["breed_id=char", "breed_id=emau", "breed_id=norw"]
 cat_url = "https://api.thecatapi.com/v1/images/search"
 query2.each_with_index do |query, index|
-    ca = cat_url+"?"+query+"&"+"limit=2"
+    ca = cat_url+"?"+query+"&"+"limit=20"
     data = JSON.parse( RestClient.get("#{ca}#{ENV["CAT_API_KEY"]}") )
     data.each do |sub_array|
             name = sub_array['breeds'][0]['id']
