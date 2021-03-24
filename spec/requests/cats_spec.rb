@@ -15,6 +15,7 @@ RSpec.describe CatsController do
             subject
             expect(json_data.length).to eq(1)
             first = json_data.first
+
             expect(first[:id]).to eq(cat.id.to_s)
             expect(first[:type]).to eq('cats')
             expect(first[:attributes]).to eq(
