@@ -1,5 +1,4 @@
 class CatsController < ApplicationController
-    include Paginable
     before_action :authenticate_user!, only: :destroy
 
     def index
@@ -8,8 +7,8 @@ class CatsController < ApplicationController
         if @cats.empty?
             render json:("there is no cats belonging to that breed")
         else
-            paginated = paginate(@cats.recent)
-            render json: serializer.new(paginated.items), status: :ok
+            @pagy, @cats = pagy(@cats.recent)
+            render json: serializer.new(@cats), status: :ok
         end
     end
 

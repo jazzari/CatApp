@@ -24,13 +24,6 @@ RSpec.describe CatsController do
             )
         end
 
-        it "paginates results" do 
-            cat1, cat2, cat3 = create_list(:cat, 3, breed_id: breed.id)
-            get '/cats', params: { page: { number: 2, size: 1 } }
-            expect(json_data.length).to eq(1)
-            expect(json_data.first[:id]).to eq(cat2.id.to_s)
-        end
-
         it "should filter cats by breed" do 
             breed.breed_id = "funy"
             cat1, cat2 = create_list(:cat, 2, breed_id: breed.id)

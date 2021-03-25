@@ -29,8 +29,8 @@ gem 'rest-client', '~> 2.1'
 
 # serialize json
 gem 'jsonapi-serializer'
-# paginate
-gem 'jsom-pagination', '~> 0.1.2'
+# pagination
+gem 'pagy'
 # User authorization
 gem 'devise_token_auth'
 
